@@ -1,12 +1,15 @@
+import jdk.swing.interop.SwingInterOpUtils;
+
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Calculator {
     public static void main(String[] args) throws IOException {
+        System.out.println("Введите 2 целых числа в диапазоне от 1-10 или I-X, и знак арифметического действия между ними: ");
         BufferedReader calc = new BufferedReader(new InputStreamReader(System.in));
         String cl = calc.readLine();   //переменная, в которой хранится содержимое строки
-        cl = cl.replaceAll("\\s","");  //удаляем пробелы, если пользователь решил вводить с ними
+        cl = cl.replaceAll("\\s", "");  //удаляем пробелы, если пользователь решил вводить с ними
 
         HashMap<String, Integer> rome = new HashMap<>();
         rome.put("I", 1);
@@ -76,50 +79,50 @@ public class Calculator {
         if (cl.contains("+")) {
             String[] numbers = cl.split("\\+");  //делим строку по символу +
 
-            if (rome.containsKey(numbers[0])&rome.containsKey(numbers[1])){  //если символы римские
-                c = rome.get(numbers[0])+rome.get(numbers[1]);  //вычисляем результат сложения, значения получаем по ключам
-                //System.out.println(Integer.toString(c));  //переводим в строку, для сравнения с римскими числами
+            //если цифры римские
+            if (rome.containsKey(numbers[0]) & rome.containsKey(numbers[1])) {
+                c = rome.get(numbers[0]) + rome.get(numbers[1]);  //вычисляем результат сложения, значения получаем по ключам
                 System.out.println(arab.get(c));  //выводим римскую
-            }
-            if (((Integer.parseInt(numbers[0])>0)&(Integer.parseInt(numbers[0])<=10))&((Integer.parseInt(numbers[1])>0)&(Integer.parseInt(numbers[1]))<=10)){  //проверяем по диапазону 1-10
-            c = Integer.parseInt(numbers[0]) + Integer.parseInt(numbers[1]);} else System.out.println("Вы ввели неподходящее число, вычисление невозможно");
+
+                //если цифры арабские
+            } else if (((Integer.parseInt(numbers[0]) > 0) & (Integer.parseInt(numbers[0]) <= 10)) & ((Integer.parseInt(numbers[1]) > 0) & (Integer.parseInt(numbers[1])) <= 10)) {  //проверяем по диапазону 1-10
+                System.out.println(Integer.parseInt(numbers[0]) + Integer.parseInt(numbers[1]));  //переводим отрезки строки до и после знака в числа, вычисляем результат
+            } else System.out.println("Вы ввели неподходящее число, вычисление невозможно");
         } else
 
             //вычитание
             if (cl.contains("-")) {
                 String[] numbers = cl.split("-");  //делим строку по символу -
-                if (rome.containsKey(numbers[0])&rome.containsKey(numbers[1])){  //если символы римские
-                    c = rome.get(numbers[0])-rome.get(numbers[1]);  //вычисляем результат сложения, значения получаем по ключам
+                if (rome.containsKey(numbers[0]) & rome.containsKey(numbers[1])) {  //если символы римские
+                    c = rome.get(numbers[0]) - rome.get(numbers[1]);  //вычисляем результат сложения, значения получаем по ключам
                     System.out.println(arab.get(c));  //выводим римскую
-                }
-                if (((Integer.parseInt(numbers[0])>0)&(Integer.parseInt(numbers[0])<=10))&((Integer.parseInt(numbers[1])>0)&(Integer.parseInt(numbers[1]))<=10)){  //проверяем по диапазону 1-10
-                c = Integer.parseInt(numbers[0]) - Integer.parseInt(numbers[1]);} else System.out.println("Вы ввели неподходящее число, вычисление невозможно");
+                } else if (((Integer.parseInt(numbers[0]) > 0) & (Integer.parseInt(numbers[0]) <= 10)) & ((Integer.parseInt(numbers[1]) > 0) & (Integer.parseInt(numbers[1])) <= 10)) {  //проверяем по диапазону 1-10
+                    System.out.println(Integer.parseInt(numbers[0]) - Integer.parseInt(numbers[1]));  //переводим отрезки строки до и после знака в числа, вычисляем результат
+                } else System.out.println("Вы ввели неподходящее число, вычисление невозможно");
             } else
 
                 //умножение
                 if (cl.contains("*")) {
                     String[] numbers = cl.split("\\*");  //делим строку по символу *
-                    if (rome.containsKey(numbers[0])&rome.containsKey(numbers[1])){  //если символы римские
-                        c = rome.get(numbers[0])*rome.get(numbers[1]);  //вычисляем результат умножения, значения получаем по ключам
+                    if (rome.containsKey(numbers[0]) & rome.containsKey(numbers[1])) {  //если символы римские
+                        c = rome.get(numbers[0]) * rome.get(numbers[1]);  //вычисляем результат умножения, значения получаем по ключам
                         System.out.println(arab.get(c));  //выводим римскую
-                    }
-                    if (((Integer.parseInt(numbers[0])>0)&(Integer.parseInt(numbers[0])<=10))&((Integer.parseInt(numbers[1])>0)&(Integer.parseInt(numbers[1]))<=10)){  //проверяем по диапазону 1-10
-                    c = Integer.parseInt(numbers[0]) * Integer.parseInt(numbers[1]);} else System.out.println("Вы ввели неподходящее число, вычисление невозможно");
+                    } else if (((Integer.parseInt(numbers[0]) > 0) & (Integer.parseInt(numbers[0]) <= 10)) & ((Integer.parseInt(numbers[1]) > 0) & (Integer.parseInt(numbers[1])) <= 10)) {  //проверяем по диапазону 1-10
+                        System.out.println(Integer.parseInt(numbers[0]) * Integer.parseInt(numbers[1]));  //переводим отрезки строки до и после знака в числа, вычисляем результат
+                    } else System.out.println("Вы ввели неподходящее число, вычисление невозможно");
                 } else
 
                     //деление
                     if (cl.contains("/")) {
                         String[] numbers = cl.split("/");  //делим строку по символу /
-                        if (rome.containsKey(numbers[0])&rome.containsKey(numbers[1])){  //если символы римские
-                            c = rome.get(numbers[0])/rome.get(numbers[1]);  //вычисляем результат деления, значения получаем по ключам
+                        if (rome.containsKey(numbers[0]) & rome.containsKey(numbers[1])) {  //если символы римские
+                            c = rome.get(numbers[0]) / rome.get(numbers[1]);  //вычисляем результат деления, значения получаем по ключам
                             System.out.println(arab.get(c));  //выводим римскую
-                        }
-                        if (((Integer.parseInt(numbers[0])>0)&(Integer.parseInt(numbers[0])<=10))&((Integer.parseInt(numbers[1])>0)&(Integer.parseInt(numbers[1]))<=10)){  //проверяем по диапазону 1-10
-                        c = Integer.parseInt(numbers[0]) / Integer.parseInt(numbers[1]);} else System.out.println("Вы ввели неподходящее число, вычисление невозможно");
+                        } else if (((Integer.parseInt(numbers[0]) > 0) & (Integer.parseInt(numbers[0]) <= 10)) & ((Integer.parseInt(numbers[1]) > 0) & (Integer.parseInt(numbers[1])) <= 10)) {  //проверяем по диапазону 1-10
+                            System.out.println(Integer.parseInt(numbers[0]) / Integer.parseInt(numbers[1]));  //переводим отрезки строки до и после знака в числа, вычисляем результат
+                        } else System.out.println("Вы ввели неподходящее число, вычисление невозможно");
                     } else
                         System.out.println("Вы ввели какую-то несуразицу");
-
-        System.out.println(c);
 
     }
 }
