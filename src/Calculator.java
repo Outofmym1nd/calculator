@@ -73,8 +73,6 @@ public class Calculator {
 
         int c = 0;
 
-        //Rimsk rimsk = Rimsk.V;    //значение, которое мы получим с консоли
-
         //сложение
         if (cl.contains("+")) {
             String[] numbers = cl.split("\\+");  //делим строку по символу +
