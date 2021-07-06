@@ -1,4 +1,7 @@
 
+import jdk.swing.interop.SwingInterOpUtils;
+
+import java.awt.*;
 import java.io.*;
 import java.util.HashMap;
 
@@ -11,6 +14,7 @@ public class Calculator {
             System.err.println("Неверный формат числа, повторите ввод");
         } else {
             cl = cl.replaceAll("\\s", "");  //удаляем пробелы, если пользователь решил вводить с ними
+            //String r = new String[] {'I', 'II', 'III', 'IV', 'V', 'VI", "VII", "VIII", "IX", "X"};
 
             HashMap<String, Integer> rome = new HashMap<>();
             rome.put("I", 1);
@@ -73,26 +77,38 @@ public class Calculator {
             arab.put(100, "C");
 
             int c;
-            //Check check = new Check();
-            //if (check.checkTwoParameters()){
 
-            // }
             //сложение
             if (cl.contains("+")) {
                 String[] numbers = cl.split("\\+");  //делим строку по символу +
+                //int i = rome.get(numbers[0]);
+                //String a =Integer.toString(rome.get(numbers[0]));
+                //System.out.println(a);
+                if ((rome.containsKey(numbers[0]) & rome.containsValue(numbers[1])) | (rome.containsValue(numbers[0]) & rome.containsKey(numbers[1])))
+                    System.out.println("Вводите только арабские или только римские цифры");
 
-                //int a = Integer.parseInt(numbers[0]);
-                //int b= Integer.parseInt(numbers[1]);
+                else {
 
-                //если цифры римские
-                if (rome.containsKey(numbers[0]) & rome.containsKey(numbers[1])) {
-                    c = rome.get(numbers[0]) + rome.get(numbers[1]);  //вычисляем результат сложения, значения получаем по ключам
-                    System.out.println(arab.get(c));  //выводим римскую
+                    //если цифры римские
 
-                    //если цифры арабские
-                } else if (((Integer.parseInt(numbers[0]) > 0) & (Integer.parseInt(numbers[0]) <= 10)) & ((Integer.parseInt(numbers[1]) > 0) & (Integer.parseInt(numbers[1])) <= 10)) {  //проверяем по диапазону 1-10
-                    System.out.println(Integer.parseInt(numbers[0]) + Integer.parseInt(numbers[1]));  //переводим отрезки строки до и после знака в числа, вычисляем результат
-                } else System.err.println("Вы ввели неподходящее число, вычисление невозможно");
+                    if (rome.containsKey(numbers[0]) & rome.containsKey(numbers[1])) {
+
+                        //c = rome.get(numbers[0]) + rome.get(numbers[1]);  //вычисляем результат сложения, значения получаем по ключам
+                        //if (arab.get(c)!=null) {
+                        //System.out.println(arab.get(c));  //выводим римскую
+                        //} else System.out.println("Ошибка ввода данных");
+
+                        try {
+                            System.out.println(arab.get((rome.get(numbers[0]) + rome.get(numbers[1]))));
+                        } catch (Exception e) {
+                            System.out.println("Ошибка ввода данных");
+                        }
+
+                        //если цифры арабские
+                    } else if (((Integer.parseInt(numbers[0]) > 0) & (Integer.parseInt(numbers[0]) <= 10)) & ((Integer.parseInt(numbers[1]) > 0) & (Integer.parseInt(numbers[1])) <= 10)) {  //проверяем по диапазону 1-10
+                        System.out.println(Integer.parseInt(numbers[0]) + Integer.parseInt(numbers[1]));  //переводим отрезки строки до и после знака в числа, вычисляем результат
+                    } else System.err.println("Вы ввели неподходящее число, вычисление невозможно");
+                }
             } else
 
                 //вычитание
