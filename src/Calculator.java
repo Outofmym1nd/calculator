@@ -1,6 +1,3 @@
-
-import jdk.swing.interop.SwingInterOpUtils;
-
 import java.awt.*;
 import java.io.*;
 import java.util.HashMap;
@@ -14,7 +11,7 @@ public class Calculator {
             System.err.println("Неверный формат числа, повторите ввод");
         } else {
             cl = cl.replaceAll("\\s", "");  //удаляем пробелы, если пользователь решил вводить с ними
-            boolean a;
+            //boolean a;
             //cl.checkRomeSymbol(a);
             //System.out.println(a);
 
