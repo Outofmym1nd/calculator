@@ -93,10 +93,9 @@ public class Calculator {
                                 break;
                             }
                         }
-                    } catch (Exception e) {
+                    } catch (ArrayIndexOutOfBoundsException e) {
                         System.err.println("Ошибочный ввод данных");
                     }
-
                 }
                 while (!rime[i].equals(numbers[1])) {  //пока в исходной строке не найдено совпадение с массивом римских цифр
                     try {
@@ -106,16 +105,14 @@ public class Calculator {
                                 break;
                             }
                         }
-                    } catch (Exception e) {
+                    } catch (ArrayIndexOutOfBoundsException e) {
                         System.err.println("Ошибочный ввод данных");
                     }
-
                 }
 
                 //если цифры римские
                 if (rome.containsKey(numbers[0]) & rome.containsKey(numbers[1])) {
-                    //c = rome.get(numbers[0]) + rome.get(numbers[1]);  //вычисляем результат сложения, значения получаем по ключам
-                    //System.out.println(arab.get(c));  //выводим римскую
+
                     System.out.println(arab.get((rome.get(numbers[0]) + rome.get(numbers[1]))));
 
                     //если цифры арабские
@@ -130,7 +127,6 @@ public class Calculator {
                     String[] numbers = cl.split("-");  //делим строку по символу -
 
                     if (rome.containsKey(numbers[0]) & rome.containsKey(numbers[1])) {  //если символы римские
-
                         while (!rime[i].equals(numbers[0])) {  //пока в исходной строке не найдено совпадение с массивом римских цифр
                             try {
                                 for (i = 0; i <= rime.length; i++) {
@@ -142,7 +138,6 @@ public class Calculator {
                             } catch (Exception e) {
                                 System.err.println("Ошибочный ввод данных");
                             }
-
                         }
                         while (!rime[i].equals(numbers[1])) {  //пока в исходной строке не найдено совпадение с массивом римских цифр
                             try {
@@ -155,11 +150,12 @@ public class Calculator {
                             } catch (Exception e) {
                                 System.err.println("Ошибочный ввод данных");
                             }
-
                         }
-
-                        c = rome.get(numbers[0]) - rome.get(numbers[1]);  //вычисляем результат сложения, значения получаем по ключам
-                        System.out.println(arab.get(c));  //выводим римскую
+                        c = rome.get(numbers[0]) - rome.get(numbers[1]);  //вычисляем результат ВЫЧИТАНИЯ, значения получаем по ключам
+                        if (c == 0) {
+                            System.out.println("В Римской империи так считать не умели, обратитесь к арабским цифрам");
+                        } else
+                            System.out.println(arab.get(c));  //выводим римскую
                     } else if (((Integer.parseInt(numbers[0]) > 0) & (Integer.parseInt(numbers[0]) <= 10)) & ((Integer.parseInt(numbers[1]) > 0) & (Integer.parseInt(numbers[1])) <= 10)) {  //проверяем по диапазону 1-10
                         System.out.println(Integer.parseInt(numbers[0]) - Integer.parseInt(numbers[1]));  //переводим отрезки строки до и после знака в числа, вычисляем результат
                     } else System.err.println("Вы ввели неподходящее число, вычисление невозможно");
@@ -168,43 +164,8 @@ public class Calculator {
                     //умножение
                     if (cl.contains("*")) {
                         String[] numbers = cl.split("\\*");  //делим строку по символу *
-                        while (!rime[i].equals(numbers[0])) {  //пока в исходной строке не найдено совпадение с массивом римских цифр
-                            try {
-                                for (i = 0; i <= rime.length; i++) {
-                                    if (rime[i].equals(numbers[0])) {  //если в процессе проверки появляется совпадение с массивом римских цифр
-                                        //System.out.println("Продолжаем вычисления");
-                                        break;
-                                    }
-                                }
-                            } catch (Exception e) {
-                                System.err.println("Ошибочный ввод данных");
-                            }
 
-                        }
-                        while (!rime[i].equals(numbers[1])) {  //пока в исходной строке не найдено совпадение с массивом римских цифр
-                            try {
-                                for (i = 0; i <= rime.length; i++) {
-                                    if (rime[i].equals(numbers[1])) {  //если в процессе проверки появляется совпадение с массивом римских цифр
-                                        //System.out.println("Продолжаем вычисления");
-                                        break;
-                                    }
-                                }
-                            } catch (Exception e) {
-                                System.err.println("Ошибочный ввод данных");
-                            }
-
-                        }
                         if (rome.containsKey(numbers[0]) & rome.containsKey(numbers[1])) {  //если символы римские
-                            c = rome.get(numbers[0]) * rome.get(numbers[1]);  //вычисляем результат умножения, значения получаем по ключам
-                            System.out.println(arab.get(c));  //выводим римскую
-                        } else if (((Integer.parseInt(numbers[0]) > 0) & (Integer.parseInt(numbers[0]) <= 10)) & ((Integer.parseInt(numbers[1]) > 0) & (Integer.parseInt(numbers[1])) <= 10)) {  //проверяем по диапазону 1-10
-                            System.out.println(Integer.parseInt(numbers[0]) * Integer.parseInt(numbers[1]));  //переводим отрезки строки до и после знака в числа, вычисляем результат
-                        } else System.err.println("Вы ввели неподходящее число, вычисление невозможно");
-                    } else
-
-                        //деление
-                        if (cl.contains("/")) {
-                            String[] numbers = cl.split("/");  //делим строку по символу /
                             while (!rime[i].equals(numbers[0])) {  //пока в исходной строке не найдено совпадение с массивом римских цифр
                                 try {
                                     for (i = 0; i <= rime.length; i++) {
@@ -216,7 +177,6 @@ public class Calculator {
                                 } catch (Exception e) {
                                     System.err.println("Ошибочный ввод данных");
                                 }
-
                             }
                             while (!rime[i].equals(numbers[1])) {  //пока в исходной строке не найдено совпадение с массивом римских цифр
                                 try {
@@ -229,9 +189,43 @@ public class Calculator {
                                 } catch (Exception e) {
                                     System.err.println("Ошибочный ввод данных");
                                 }
-
                             }
+                            c = rome.get(numbers[0]) * rome.get(numbers[1]);  //вычисляем результат умножения, значения получаем по ключам
+                            System.out.println(arab.get(c));  //выводим римскую
+                        } else if (((Integer.parseInt(numbers[0]) > 0) & (Integer.parseInt(numbers[0]) <= 10)) & ((Integer.parseInt(numbers[1]) > 0) & (Integer.parseInt(numbers[1])) <= 10)) {  //проверяем по диапазону 1-10
+                            System.out.println(Integer.parseInt(numbers[0]) * Integer.parseInt(numbers[1]));  //переводим отрезки строки до и после знака в числа, вычисляем результат
+                        } else System.err.println("Вы ввели неподходящее число, вычисление невозможно");
+                    } else
+
+                        //деление
+                        if (cl.contains("/")) {
+                            String[] numbers = cl.split("/");  //делим строку по символу /
+
                             if (rome.containsKey(numbers[0]) & rome.containsKey(numbers[1])) {  //если символы римские
+                                while (!rime[i].equals(numbers[0])) {  //пока в исходной строке не найдено совпадение с массивом римских цифр
+                                    try {
+                                        for (i = 0; i <= rime.length; i++) {
+                                            if (rime[i].equals(numbers[0])) {  //если в процессе проверки появляется совпадение с массивом римских цифр
+                                                //System.out.println("Продолжаем вычисления");
+                                                break;
+                                            }
+                                        }
+                                    } catch (Exception e) {
+                                        System.err.println("Ошибочный ввод данных");
+                                    }
+                                }
+                                while (!rime[i].equals(numbers[1])) {  //пока в исходной строке не найдено совпадение с массивом римских цифр
+                                    try {
+                                        for (i = 0; i <= rime.length; i++) {
+                                            if (rime[i].equals(numbers[1])) {  //если в процессе проверки появляется совпадение с массивом римских цифр
+                                                //System.out.println("Продолжаем вычисления");
+                                                break;
+                                            }
+                                        }
+                                    } catch (Exception e) {
+                                        System.err.println("Ошибочный ввод данных");
+                                    }
+                                }
                                 c = rome.get(numbers[0]) / rome.get(numbers[1]);  //вычисляем результат деления, значения получаем по ключам
                                 System.out.println(arab.get(c));  //выводим римскую
                             } else if (((Integer.parseInt(numbers[0]) > 0) & (Integer.parseInt(numbers[0]) <= 10)) & ((Integer.parseInt(numbers[1]) > 0) & (Integer.parseInt(numbers[1])) <= 10)) {  //проверяем по диапазону 1-10
@@ -239,7 +233,6 @@ public class Calculator {
                             } else System.err.println("Вы ввели неподходящее число, вычисление невозможно");
                         } else
                             System.err.println("Вы ввели какую-то несуразицу");
-
         }
     }
 }
