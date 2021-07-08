@@ -105,8 +105,7 @@ public class Calculator {
                 int c;
                 if (validate1.checkRomeSymbol(validate1.enter)) {  //если первая строка содержит римскую цифру
                     if (validate2.checkRomeSymbol(validate2.enter)) {  //если вторая строка содержит римскую цифру
-                        System.out.println(arab.get((rome.get(numbers[0]) - rome.get(numbers[1]))));  //вычисляем результат, значения получаем по ключам
-                        c = rome.get(numbers[0]) - rome.get(numbers[1]);
+                         c = rome.get(numbers[0]) - rome.get(numbers[1]);
                         if (c == 0) {
                             System.out.println("В Римской империи так считать не умели");
                         } else
