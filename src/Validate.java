@@ -1,7 +1,7 @@
 import java.util.HashMap;
 
 public class Validate {
-    String enter;
+    //String enter;
 
     boolean checkRomeSymbol(String enter) {
         String[] rime = new String[]{"I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"};
@@ -36,6 +36,7 @@ public class Validate {
         }
         return false;
     }
+
     public boolean checkTwoParameters(String[] elements) {
         return elements != null && elements.length == 2;
     }
@@ -110,4 +111,12 @@ public class Validate {
         return a;
     }
 
+    boolean checkGauges(String enter) {  //Датчики - диапазон неотрицательных чисел
+        int p = Integer.parseInt(enter);
+        if (p > 0 && p < 11) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
